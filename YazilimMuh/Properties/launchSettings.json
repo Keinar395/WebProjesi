@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "YazilimMuh (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "YazilimMuh (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
