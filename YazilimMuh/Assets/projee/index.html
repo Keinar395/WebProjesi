@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title> KİTAPLAN 📚</title>
+  <!-- Proje Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- Proje Css -->
+  <link rel="stylesheet" href="style.css" />
+  <!-- Font Awesome Icon Kütüphanesi -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+</head>
+
+<body>
+
+  <!-- Header Menü -->
+  <div class="site-title">
+    <h1 class="site-title-h1">KİTAPLAN 📚</h1>
+    <div class="top-right-buttons">
+      <button onclick="window.location.href='search.html'">
+        <i class="fas fa-search"></i>
+      </button>
+      <button onclick="window.location.href='index.html'">
+        <i class="fas fa-home"></i>
+      </button>
+      <button onclick="window.location.href='newpost.html'">
+        <i class="fas fa-pencil-alt"></i>
+      </button>
+      <button onclick="window.location.href='profile.html'">
+        <i class="fas fa-user"></i>
+      </button>
+      <button id="darkModeToggle" onclick="toggleDarkMode()">
+        <i class="far fa-moon"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="inlineBookRow">
+
+    <!-- Kitaplar galerisi -->
+    <div class="gallery">
+      <div class="gallery-item" onclick="openModal('Franz Kafka - Dönüşüm')">
+        <button>Franz Kafka - Dönüşüm - 1984</button>
+        <img src="fotolar/resim.jpg" alt="Franz Kafka Dönüşüm" />
+        <div class="meta">
+          <span>📅 20/04/2025</span>
+          <span>👤 Ahmet Yılmaz</span>
+        </div>
+      </div>
+      <div class="gallery-item" onclick="openModal('George Orwell - 1984')">
+        <button>George Orwell - 1984</button>
+        <img src="fotolar/1984.jpeg" alt="1984" />
+        <div class="meta">
+          <span>📅 15/03/2025</span>
+          <span>👤 Elif Kaya</span>
+        </div>
+      </div>
+      <div class="gallery-item" onclick="openModal('Sabahattin Ali - Kürk Mantolu Madonna')">
+        <button>Sabahattin Ali - Kürk Mantolu Madonna</button>
+        <img src="fotolar/kurk.jpeg" alt="Kürk Mantolu Madonna" />
+        <div class="meta">
+          <span>📅 10/02/2025</span>
+          <span>👤 Burak Demir</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Yorum Kutusu -->
+    <div class="modal">
+      <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <h3 class="modal-title">💬 Yorum Yap</h3>
+        <textarea rows="4" placeholder="Yorumunuzu buraya yazın..." style="width:100%;"></textarea>
+        <button>Gönder</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+
+    function toggleDarkMode() {
+      const isDarkMode = document.body.classList.toggle('dark-mode');
+
+      if (isDarkMode) {
+        // Karanlık modda renk değişimlerini kapat
+        document.body.style.backgroundColor = "#121212"; // Varsayılan siyah arka plan
+        window.removeEventListener("scroll", handleScrollBackgroundChange);
+        disableHoverEffects();
+      } else {
+        // Karanlık moddan çıkıldığında renk değişimlerini tekrar aktif et
+        document.body.style.backgroundColor = "rgb(135, 206, 250)"; // Başlangıç rengi
+        window.addEventListener("scroll", handleScrollBackgroundChange);
+        enableHoverEffects();
+      }
+    }
+
+    function handleScrollBackgroundChange() {
+      const scrollPosition = window.scrollY;
+
+      const red = Math.floor((Math.sin(scrollPosition * 0.02) + 1) * 127.5);
+      const green = Math.floor((Math.sin(scrollPosition * 0.02 + 3) + 1) * 127.5);
+      const blue = Math.floor((Math.sin(scrollPosition * 0.02 + 6) + 1) * 127.5);
+
+      document.body.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
+    }
+
+    function disableHoverEffects() {
+      const galleryItems = document.querySelectorAll(".gallery-item");
+      const menuButtons = document.querySelectorAll(".top-right-buttons button");
+      const siteTitle = document.querySelector(".site-title-h1");
+
+      galleryItems.forEach((item) => {
+        item.onmouseover = null;
+      });
+
+      menuButtons.forEach((button) => {
+        button.onmouseover = null;
+      });
+
+      siteTitle.onmouseover = null;
+    }
+
+    function enableHoverEffects() {
+      const galleryItems = document.querySelectorAll(".gallery-item");
+      const menuButtons = document.querySelectorAll(".top-right-buttons button");
+      const siteTitle = document.querySelector(".site-title-h1");
+
+      galleryItems.forEach((item, index) => {
+        item.onmouseover = () => {
+          const red = Math.floor((Math.sin(index * 1.2) + 1) * 127.5);
+          const green = Math.floor((Math.sin(index * 1.2 + 3) + 1) * 127.5);
+          const blue = Math.floor((Math.sin(index * 1.2 + 6) + 1) * 127.5);
+
+          document.body.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
+        };
+      });
+
+      menuButtons.forEach((button, index) => {
+        button.onmouseover = () => {
+          const red = Math.floor((Math.sin(index * 1.5) + 1) * 127.5);
+          const green = Math.floor((Math.sin(index * 1.5 + 3) + 1) * 127.5);
+          const blue = Math.floor((Math.sin(index * 1.5 + 6) + 1) * 127.5);
+
+          document.body.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
+        };
+      });
+
+      siteTitle.onmouseover = () => {
+        const red = Math.floor(Math.random() * 255);
+        const green = Math.floor(Math.random() * 255);
+        const blue = Math.floor(Math.random() * 255);
+
+        document.body.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
+      };
+    }
+
+    // Başlangıçta scroll event listener'ı ekle
+    window.addEventListener("scroll", handleScrollBackgroundChange);
+    enableHoverEffects();
+
+    function openModal(bookTitle) {
+      var modal = document.querySelector('.modal');
+      var modalTitle = document.querySelector('.modal .modal-title');
+
+      // Karanlık mod kontrolü
+      const isDarkMode = document.body.classList.contains('dark-mode');
+
+      // Rastgele bir arka plan rengi oluştur
+      const red = isDarkMode ? Math.floor(Math.random() * 50) : Math.floor(Math.random() * 256); // Karanlık modda 0-50 arası
+      const green = isDarkMode ? Math.floor(Math.random() * 50) : Math.floor(Math.random() * 256);
+      const blue = isDarkMode ? Math.floor(Math.random() * 50) : Math.floor(Math.random() * 256);
+
+      // Modal arka plan rengini değiştir
+      modal.querySelector('.modal-content').style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
+
+      modalTitle.textContent = `💬 ${bookTitle} için Yorum Yap`;
+      modal.style.display = 'flex'; // Ortalanmış aç
+    }
+
+    function closeModal() {
+      document.querySelector('.modal').style.display = 'none';
+    }
+
+    document.body.style.backgroundColor = "rgb(135, 206, 250)"; // Başlangıç rengi
+
+  </script>
+
+</body>
+</html>
