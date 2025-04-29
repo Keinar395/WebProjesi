@@ -15,7 +15,7 @@
 
 <body>
 
-    <!-- Header Menü -->
+    
     <div class="site-title">
         <h1 class="site-title-h1">KİTAPLAN 📚</h1>
     </div>
@@ -46,10 +46,10 @@
 
     <div class="inlineBookRow">
 
-        <!-- Kitaplar galerisi -->
+        
         <div class="gallery">
             <div class="gallery-item" onclick="openModal('Franz Kafka - Dönüşüm')">
-                <button>Franz Kafka - Dönüşüm</button>
+                <button onclick="window.location.href='post.html'">Franz Kafka - Dönüşüm</button>
                 <img src="fotolar/resim.jpg" alt="Franz Kafka Dönüşüm" />
                 <div class="meta">
                     <span>📅 20/04/2025</span>
@@ -57,17 +57,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- Modal Yorum Kutusu -->
-        <div class="modal">
-            <div class="modal-content">
-                <span class="close-btn" onclick="closeModal()">&times;</span>
-                <h3 class="modal-title">💬 Yorum Yap</h3>
-                <textarea rows="4" placeholder="Yorumunuzu buraya yazın..." style="width:100%;"></textarea>
-                <button>Gönder</button>
-            </div>
-        </div>
-
     </div>
 
     <script>
@@ -82,7 +71,7 @@
                 disableHoverEffects();
             } else {
                 // Karanlık moddan çıkıldığında renk değişimlerini tekrar aktif et
-                document.body.style.backgroundColor = "rgb(135, 206, 250)"; // Başlangıç rengi
+                document.body.style.backgroundColor = "#87bae9"; // Başlangıç rengi
                 window.addEventListener("scroll", handleScrollBackgroundChange);
                 enableHoverEffects();
             }
@@ -128,36 +117,39 @@
 
         }
 
-        // Başlangıçta scroll event listener'ı ekle
-        window.addEventListener("scroll", handleScrollBackgroundChange);
-        enableHoverEffects();
-
-        function openModal(bookTitle) {
-            var modal = document.querySelector('.modal');
-            var modalTitle = document.querySelector('.modal .modal-title');
-
-            // Karanlık mod kontrolü
-            const isDarkMode = document.body.classList.contains('dark-mode');
-
-            // Rastgele bir arka plan rengi oluştur
-            const red = isDarkMode ? Math.floor(Math.random() * 50) : Math.floor(Math.random() * 256); // Karanlık modda 0-50 arası
-            const green = isDarkMode ? Math.floor(Math.random() * 50) : Math.floor(Math.random() * 256);
-            const blue = isDarkMode ? Math.floor(Math.random() * 50) : Math.floor(Math.random() * 256);
-
-            // Modal arka plan rengini değiştir
-            modal.querySelector('.modal-content').style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
-
-            modalTitle.textContent = `💬 ${bookTitle} için Yorum Yap`;
-            modal.style.display = 'flex'; // Ortalanmış aç
-        }
-
-        function closeModal() {
-            document.querySelector('.modal').style.display = 'none';
-        }
-
         document.body.style.backgroundColor = "rgb(135, 206, 250)"; // Başlangıç rengi
 
+        document.querySelectorAll(".gallery-item").forEach((item) => {  //Gönderinin üzerine gelindiğinde resmin büyümemesi için ömer tarafından eklendi. çünkü css lik bir durum olmadığı anlaşıldı.
+    item.addEventListener("mouseover", () => {
+        const img = item.querySelector("img");
+        if (img) {
+            img.style.transform = "scale(1)"; // Resmin büyümesini engelle
+        }
+    });
+
+    item.addEventListener("mouseout", () => {
+        const img = item.querySelector("img");
+        if (img) {
+            img.style.transform = ""; // Varsayılan duruma döndür
+        }
+    });
+});
+
+document.addEventListener('click', function (event) {   // ARAMA BUTONUNA TIKLANDIĞINDA AÇILAN ARAMA KUTUSUNUN , SAYFANIN HERHANGİ BİR YERİNE TIKLANDIĞINDA KAPANMASI İÇİN ÖMER TARAFINDAN EKLENDİ.KUTU İŞLEM GÖRMEDİĞİNDE BOŞ YERE AÇIK DURMASINA GEREK YOK GİBİ.
+    const searchInput = document.getElementById('searchInput');
+    const searchButton = document.querySelector('.search-container button');
+
+    // Eğer tıklanan eleman arama kutusu veya arama butonu değilse
+    if (searchInput && !searchInput.contains(event.target) && !searchButton.contains(event.target)) {
+        searchInput.classList.remove('active'); // Animasyonu kaldır
+        setTimeout(() => {
+            searchInput.style.display = 'none'; // Arama kutusunu gizle
+        }, 300); // Animasyon süresi kadar bekle
+    }
+});
     </script>
+
+    
 
 </body>
 </html>

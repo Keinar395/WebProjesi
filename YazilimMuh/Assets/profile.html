@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+    <title>Kullanıcı Profili</title>
+    
+</head>
+<body>
+    <div class="site-title">
+        <h1 class="site-title-h1">KİTAPLAN 📚</h1>
+    </div>
+    <div class="top-right-buttons">
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Kitap ara..." style="display: none;" />
+            <button onclick="toggleSearchBar()">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+        <button onclick="window.location.href='index.html'">
+            <i class="fas fa-home"></i>
+        </button>
+        <button onclick="window.location.href='newpost.html'">
+            <i class="fas fa-pencil-alt"></i>
+        </button>
+        <button onclick="window.location.href='profile.html'">
+            <i class="fas fa-user"></i>
+        </button>
+        <button id="darkModeToggle" onclick="toggleDarkMode()">
+            <i class="far fa-moon"></i>
+        </button>
+    </div>
+
+    <div class="profile-container">
+        <div class="profile-box">
+            <img src="Basic_UI_Icon_Pack_-_Glyph_user-512.webp" alt="Profile Picture">
+            <h2>Ahmet Yılmaz</h2>
+            <p>@ahmet246</p>
+            <p>Şehir: Zonguldak</p>
+            <p>Yaş: 25</p> 
+            <p>Doğum Günü: 01/01/2000</p>
+            <p>Telefon: 0555 555 5555</p>
+            <p>Hakkında: Kitap okumayı seven biriyim. Özellikle bilim kurgu ve felsefi kitapları tercih ediyorum.</p>
+        </div>
+    </div>
+
+    <div class="paylaşımlar-container">
+        <div class="paylaşımlar-box">
+            <h2>Paylaşımlar</h2>
+            <ul>
+                <li>
+                    <button onclick="window.location.href='post.html'">
+                        <h3>Franz Kafka - Dönüşüm</h3>
+                        <p>📅 20/04/2025</p>
+                        <p>👤 Ahmet Yılmaz</p>
+                    </button>
+                </li>
+                <li>
+                    <button onclick="window.location.href='post.html'">
+                        <h3>Franz Kafka - Dönüşüm</h3>
+                        <p>📅 20/04/2025</p>
+                        <p>👤 Ahmet Yılmaz</p>
+                    </button>
+                </li>
+                <li>
+                    <button onclick="window.location.href='post.html'">
+                        <h3>Franz Kafka - Dönüşüm</h3>
+                        <p>📅 20/04/2025</p>
+                        <p>👤 Ahmet Yılmaz</p>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function toggleSearchBar() {
+            console.log("toggleSearchBar çalıştı!"); // Test için konsola yazdır
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput.classList.contains('active')) {
+                searchInput.classList.remove('active'); // Animasyonu kaldır
+                setTimeout(() => {
+                    searchInput.style.display = 'none'; // Gizle
+                }, 300); // Animasyon süresi kadar bekle
+            } else {
+                searchInput.style.display = 'block'; // Görünür yap
+                setTimeout(() => {
+                    searchInput.classList.add('active'); // Animasyonu uygula
+                }, 10); // Görünür olduktan sonra animasyonu başlat
+                searchInput.focus(); // Otomatik olarak odaklan
+            }
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+
+        document.addEventListener('click', function (event) {   // ARAMA BUTONUNA TIKLANDIĞINDA AÇILAN ARAMA KUTUSUNUN , SAYFANIN HERHANGİ BİR YERİNE TIKLANDIĞINDA KAPANMASI İÇİN ÖMER TARAFINDAN EKLENDİ.KUTU İŞLEM GÖRMEDİĞİNDE BOŞ YERE AÇIK DURMASINA GEREK YOK GİBİ.
+    const searchInput = document.getElementById('searchInput');
+    const searchButton = document.querySelector('.search-container button');
+
+    // Eğer tıklanan eleman arama kutusu veya arama butonu değilse
+    if (searchInput && !searchInput.contains(event.target) && !searchButton.contains(event.target)) {
+        searchInput.classList.remove('active'); // Animasyonu kaldır
+        setTimeout(() => {
+            searchInput.style.display = 'none'; // Arama kutusunu gizle
+        }, 300); // Animasyon süresi kadar bekle
+    }
+});
+    </script>
+
+    
+</body>
+</html>
